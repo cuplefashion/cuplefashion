@@ -41,7 +41,7 @@ exports = module.exports = function (app) {
 	app.get('/logout', routes.views.logout)
 	app.use('/signup', routes.views.signup);
 	app.use('/forgotpassword', routes.views.forgotpassword);
-
+	app.use('/mypage', routes.views.mypage);
 	/* 
 		Set route for product detail page
 		when clicking product from products page, 

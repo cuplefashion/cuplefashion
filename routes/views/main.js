@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var SiteInfo = keystone.list('SiteInfo');
 var firebase = require('firebase');
+var customer = keystone.list('Customer');
 
 exports = module.exports = function (req, res) {
 
@@ -25,7 +26,19 @@ exports = module.exports = function (req, res) {
 		if (user) {
 			console.log("[routes/main.js] Welcome customer! you're currently logged in");
 			locals.user = user
-			const uid = user.uid
+			const uuid = user.uid.toLowerCase()
+
+			customer.model.find({ uid: uuid }).exec(function (err, data) {
+				if (err) {
+					console.log(err);
+					res.status(500).send('DB Error');
+					next();
+				}
+				locals.customer = data;
+				console.log(data);
+				next();
+			});
+
 			/* const docRef = db.collection('users').doc(uid)
 			docRef.get().then(doc => {
 				if (doc.exists) {

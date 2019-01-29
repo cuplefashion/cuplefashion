@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var firebase = require('firebase');
+var customer = keystone.list('Customer');
 
 exports = module.exports = function (req, res) {
 
@@ -11,7 +12,6 @@ exports = module.exports = function (req, res) {
   locals.section = 'login';
 
   view.on('post', function (next) {
-    console.log('[routes/login.js] Login post function executed')
     const email = req.body.inputEmail;
     const password = req.body.inputPassword;
 
@@ -19,22 +19,38 @@ exports = module.exports = function (req, res) {
     // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signInWithEmailAndPassword
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function (user) {
-        const uid = user.user.uid
-        console.log("User UID : " + uid)
+        //for some unknown reason, uid section in keystone admin automatically changed capital letters to lowercase.
 
-        /* const docRef = db.collection('users').doc(uid)
-        docRef.get().then(doc => {
-          if (doc.exists) {
-            console.log("[routes/login.js] logged in and retreived user info successfully")
-            res.redirect('/')
-          } else {
-            console.log("No such document!")
-            next()
+        const uuid = user.user.uid.toLowerCase()
+
+        console.log("User UID : " + uuid)
+        console.log('[routes/login.js] Login post function executed')
+
+        /*
+        difference between findOne() and find():
+        findOne - if query matches, first document is returned, otherwise null.
+        find - nomatter number of documents matched, a cursor is returned, never null.
+        */
+        customer.model.findOne({ uid: uuid }).exec(function (err, customer) {
+          if (err) {
+            console.log(err);
+            res.status(500).send('DB Error');
+            next();
           }
-        }).catch(err => {
-          console.log("Error getting document", err)
-          next(err)
-        }) */
+          if (!customer) {
+            console.log(" Couldn't find matching user");
+            res.status(500).send('NO customer uid matched with firebase in database');
+            next();
+          }
+          else {
+            locals.customer = customer;
+
+            console.log("[routes/login.js] logged in and retreived user info successfully")
+            console.log("[routes/login.js] Customer Information:" + customer);
+            res.redirect('/')
+          }
+
+        });
 
       }).catch(function (error) {
         console.log(error.message)
