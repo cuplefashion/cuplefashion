@@ -1,11 +1,6 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
-/**
- Error occurred when you try to add customer info in admin page.
-
- FIXME: need to fix.
- */
 var Customer = new keystone.List('Customer');
 
 Customer.add({

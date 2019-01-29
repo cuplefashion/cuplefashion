@@ -25,8 +25,8 @@
               src='/images/avatar.png' class="img-circle" style="max-height:25px"></img>
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
-
-            <li><a href="#">{{phoneNumber}}</a></li>
+            <!-- #if customer part works, but {{email}} part doesnt work -->
+            <li><a href="#">{{customer.email}}</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/logout">LOG OUT</a></li>
             <li role="separator" class="divider"></li>
@@ -41,4 +41,4 @@
       </ul>
     </div>
   </div>
-</nav>s
+</nav>
