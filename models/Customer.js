@@ -1,6 +1,28 @@
 var keystone = require('keystone');
+var firebase = require('firebase');
 var Types = keystone.Field.Types;
 
+<<<<<<< HEAD
+=======
+/**
+ Issue : Error occurred when you try to add customer info in admin page.
+
+ FIXED (minjun)
+ 
+ cause : when adding customer from admin page, 
+	it creates customer with name and email but without uid becuase uid is from firebase.
+	so uid is null at this point
+	and when adding another customer, this second customer's uid is also null
+	and now we have two documents which has the same uid value (null)
+	this is not allowed because uid is the first value
+	(I don't quite understand but it looks like the first element is automatically assigned as key element)
+ 
+ resolution :	Added middleware which executed right after the customer is created
+	on mongodb. What this middleware does is to create firebase user based on
+	the info admin has just entered and get uid from firebase > update customer in mongodb
+							
+ */
+>>>>>>> e17621618d6f21ffd8a7e14edb95e59ecc7b732f
 var Customer = new keystone.List('Customer');
 
 Customer.add({
@@ -16,4 +38,31 @@ Customer.add({
 		zipcode: { type: Types.Number },
 	}
 });
+<<<<<<< HEAD
+=======
+
+Customer.defaultColumns = "name, email"
+
+// when admin adds customer manually from admin page, 
+// this middleware adds customer from Firebase as well
+Customer.schema.post('save', (doc, next) => {
+	if (!doc.uid) {
+		console.log("New customer is added from admin page - adding from Firebase too")
+		firebase.auth().createUserWithEmailAndPassword(doc.email, "test123")
+			.then((user) => {
+				const uid = user.user.uid
+				Customer.model.updateOne(
+					{ _id: doc._id },
+					{ $set: { uid: uid } }
+				).then(() => next())
+			}).catch((error) => {
+				console.log(error.message)
+				next(error)
+			})
+	} else {
+		next()
+	}
+})
+
+>>>>>>> e17621618d6f21ffd8a7e14edb95e59ecc7b732f
 Customer.register();

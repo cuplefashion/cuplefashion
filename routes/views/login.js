@@ -27,7 +27,7 @@ exports = module.exports = function (req, res) {
         /*
         difference between findOne() and find():
         findOne - if query matches, first document is returned, otherwise null.
-        find - nomatter number of documents matched, a cursor is returned, never null.
+        find - no matter how many number of documents matched, a cursor is returned, never null.
         */
         customer.model.findOne({ uid: uuid }).exec(function (err, customer) {
           if (err) {

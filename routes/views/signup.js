@@ -1,7 +1,6 @@
 var keystone = require('keystone');
 var firebase = require('firebase');
-// var admin = require("firebase-admin");
-// var db = admin.firestore();
+const Customer = keystone.list('Customer')
 
 exports = module.exports = function (req, res) {
 
@@ -28,10 +27,20 @@ exports = module.exports = function (req, res) {
 			firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password1)
 				.then((user) => {
 					const uid = user.user.uid
-					console.log("User UID : " + uid)
-
-					// TODO(byul) - Store user info to db
-
+					const name = newUser.firstName + " " + newUser.lastName
+					Customer.model.create({
+						uid: uid,
+						name: {
+							first: newUser.firstName,
+							last: newUser.lastName
+						},
+						email: newUser.email,
+					}).then(() => {
+						next()
+					}).catch(err => {
+						console.log("Error while creating customer database after Firebase user is successfully added")
+						next(err)
+					})
 				}).catch((error) => {
 					console.log(error.message)
 					req.flash('warning', error.message) // send message to client
