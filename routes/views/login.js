@@ -19,9 +19,7 @@ exports = module.exports = function (req, res) {
     // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signInWithEmailAndPassword
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function (user) {
-        //for some unknown reason, uid section in keystone admin automatically changed capital letters to lowercase.
-
-        const uuid = user.user.uid.toLowerCase()
+        const uuid = user.user.uid
 
         console.log("User UID : " + uuid)
         console.log('[routes/login.js] Login post function executed')

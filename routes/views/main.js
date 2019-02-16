@@ -26,7 +26,7 @@ exports = module.exports = function (req, res) {
 		if (user) {
 			console.log("[routes/main.js] Welcome customer! you're currently logged in");
 			locals.user = user
-			const uuid = user.uid.toLowerCase()
+			const uuid = user.uid
 
 			customer.model.find({ uid: uuid }).exec(function (err, data) {
 				if (err) {

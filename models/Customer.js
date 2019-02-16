@@ -4,9 +4,9 @@ var Types = keystone.Field.Types;
 var Customer = new keystone.List('Customer');
 
 Customer.add({
-	uid: { type: Types.Key, unique: true },
-	name: { type: Types.Name, required: true, index: true },
-	email: { type: Types.Email, initial: true, required: true, unique: true, index: true },
+	uid: { type: Types.Text },
+	name: { type: Types.Name, required: true },
+	email: { type: Types.Email, initial: true, required: true, unique: true },
 	phoneNumber: { type: Types.Text },
 	address: {
 		address1: { type: Types.Text },
@@ -16,5 +16,4 @@ Customer.add({
 		zipcode: { type: Types.Number },
 	}
 });
-
 Customer.register();
