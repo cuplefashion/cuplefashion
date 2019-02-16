@@ -17,7 +17,7 @@ exports = module.exports = (req, res) => {
     .model.find().populate('images'))
 
   firebase.auth().onAuthStateChanged(function (user) {
-    if (user) locals.user = user
+    if (user) locals.customer = user
   });
 
   // Load products

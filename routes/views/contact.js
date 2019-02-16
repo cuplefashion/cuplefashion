@@ -25,7 +25,7 @@ exports = module.exports = function (req, res) {
 		});
 
 		firebase.auth().onAuthStateChanged(function (user) {
-			if (user) locals.user = user
+			if (user) locals.customer = user
 		});
 
 	});

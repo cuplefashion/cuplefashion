@@ -36,4 +36,5 @@ $("#menu-toggle").on("click", function (e) {
 ==================================================================*/
 $("input").on("click", function () {
   $(".flash-message").hide()
+  $(".form-error-message").hide()
 })

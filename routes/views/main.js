@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var SiteInfo = keystone.list('SiteInfo');
 var firebase = require('firebase');
+var Customer = keystone.list('Customer');
 
 exports = module.exports = function (req, res) {
 
@@ -23,53 +24,25 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 		const user = firebase.auth().currentUser
 		if (user) {
-			console.log("[routes/main.js] Welcome customer! you're currently logged in");
+			console.log("[routes/main.js] Welcome Customer! you're currently logged in");
 			locals.user = user
-			const uid = user.uid
-			/* const docRef = db.collection('users').doc(uid)
-			docRef.get().then(doc => {
-				if (doc.exists) {
-					locals.displayName = doc.data()
-					console.log(doc.data())
-					next()
-				} else {
-					console.log("No such document!")
-					next()
+			const uuid = user.uid
+
+			Customer.model.findOne({ uid: uuid }).exec(function (err, data) {
+				if (err) {
+					console.log(err);
+					res.status(500).send('DB Error');
+					next();
 				}
-			}).catch(err => {
-				console.log("Error getting document", err)
-				next(err)
-			}) */
+				locals.customer = data;
+				console.log(data);
+				next();
+			});
+
 		} else {
 			console.log("[routes/main.js] You're not logged in");
 			next()
 		}
-
-		// firebase.auth().onAuthStateChanged(function (user) {
-		//   if (user) {
-		//     console.log("[routes/main.js] Welcome customer! you're currently logged in");
-		//     locals.user = user
-		//     const uid = user.uid
-		//     const docRef = db.collection('users').doc(uid)
-		//     docRef.get().then(doc => {
-		//       if (doc.exists) {
-		//         locals.displayName = doc.data()
-		//         console.log(doc.data())
-		//         console.log('3')
-		//         next()
-		//       } else {
-		//         console.log("No such document!")
-		//         next()
-		//       }
-		//     }).catch(err => {
-		//       console.log("Error getting document", err)
-		//       next(err)
-		//     })
-		//   } else {
-		//     console.log("[routes/main.js] You're not logged in");
-		//     next()
-		//   }
-		// });
 	})
 
 

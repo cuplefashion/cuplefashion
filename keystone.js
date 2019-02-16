@@ -67,23 +67,21 @@ keystone.set('nav', {
 //need to initialise firebase in keystone.js for using them in routes files.
 var config = {
 	// Deokgwan's Firebase
-
-	/* apiKey: "AIzaSyCUWwhrBJeN7rDTUAZ0G2N8dDftJK47Zbo",
+	/*
+	apiKey: "AIzaSyCUWwhrBJeN7rDTUAZ0G2N8dDftJK47Zbo",
 	authDomain: "login-63897.firebaseapp.com",
 	databaseURL: "https://login-63897.firebaseio.com",
 	projectId: "login-63897",
 	storageBucket: "login-63897.appspot.com",
-	messagingSenderId: "986984805875" */
-
+	messagingSenderId: "986984805875"
+	*/
 	// Minjun's Firebase
-
 	apiKey: "AIzaSyBCa0Xz5w_yVHJSAeDPIerXH6ivfgt-RPg",
 	authDomain: "cuplefashion-c41cf.firebaseapp.com",
 	databaseURL: "https://cuplefashion-c41cf.firebaseio.com",
 	projectId: "cuplefashion-c41cf",
 	storageBucket: "cuplefashion-c41cf.appspot.com",
 	messagingSenderId: "646752289112",
-
 };
 
 firebase.initializeApp(config);

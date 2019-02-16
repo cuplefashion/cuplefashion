@@ -1,3 +1,0 @@
-function checklogininput() {
-  return true;
-}
