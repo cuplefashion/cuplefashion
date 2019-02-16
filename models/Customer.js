@@ -19,8 +19,10 @@ var Types = keystone.Field.Types;
 	on mongodb. What this middleware does is to create firebase user based on
 	the info admin has just entered and get uid from firebase > update customer in mongodb
 							
- */
+ **/
 var Customer = new keystone.List('Customer');
+
+// TODO (minjun) : dynamic fields - check if possible to dynamically add field based on other field's value
 
 Customer.add({
 	uid: { type: Types.Text },
@@ -34,6 +36,7 @@ Customer.add({
 		state: { type: Types.Text },
 		zipcode: { type: Types.Number },
 	}
+	// TODO (byul) : add more fields if needed
 });
 
 Customer.defaultColumns = "name, email"

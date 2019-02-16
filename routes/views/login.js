@@ -20,6 +20,7 @@ exports = module.exports = function (req, res) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function (user) {
         const uuid = user.user.uid
+
         console.log("User UID : " + uuid)
         console.log('[routes/login.js] Login post function executed')
 
