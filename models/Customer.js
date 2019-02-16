@@ -2,8 +2,6 @@ var keystone = require('keystone');
 var firebase = require('firebase');
 var Types = keystone.Field.Types;
 
-<<<<<<< HEAD
-=======
 /**
  Issue : Error occurred when you try to add customer info in admin page.
 
@@ -21,9 +19,10 @@ var Types = keystone.Field.Types;
 	on mongodb. What this middleware does is to create firebase user based on
 	the info admin has just entered and get uid from firebase > update customer in mongodb
 							
- */
->>>>>>> e17621618d6f21ffd8a7e14edb95e59ecc7b732f
+ **/
 var Customer = new keystone.List('Customer');
+
+// TODO (minjun) : dynamic fields - check if possible to dynamically add field based on other field's value
 
 Customer.add({
 	uid: { type: Types.Text },
@@ -37,9 +36,8 @@ Customer.add({
 		state: { type: Types.Text },
 		zipcode: { type: Types.Number },
 	}
+	// TODO (byul) : add more fields if needed
 });
-<<<<<<< HEAD
-=======
 
 Customer.defaultColumns = "name, email"
 
@@ -64,5 +62,4 @@ Customer.schema.post('save', (doc, next) => {
 	}
 })
 
->>>>>>> e17621618d6f21ffd8a7e14edb95e59ecc7b732f
 Customer.register();

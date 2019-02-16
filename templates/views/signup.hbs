@@ -1,3 +1,5 @@
+{{!-- TODO (byul) : Signup/Signin page code refactoring --}}
+
 <br><br>
 <h1 style="text-align: center; font-size: 30px; font-weight: normal;">create account</h1>
 <br><br>
@@ -18,28 +20,24 @@
 
         <div class="form-group">
           <center>
-            <input type="text" name="firstName" class="form-control" id="firstName" size="4" maxlength="15"
-              placeholder="first Name">
+            <input type="text" name="firstName" class="form-control" id="firstName" size="4" maxlength="15" placeholder="first Name">
           </center>
         </div>
         <div class="form-group">
           <center>
-            <input type="text" name="lastName" class="form-control" id="lastName" size="4" maxlength="15"
-              placeholder="last Name">
+            <input type="text" name="lastName" class="form-control" id="lastName" size="4" maxlength="15" placeholder="last Name">
           </center>
         </div>
 
         <div class="form-group">
           <center>
-            <input type="text" class="form-control" name="emailAddress" id="emailAddress" maxlength="45"
-              placeholder="email address">
+            <input type="text" class="form-control" name="emailAddress" id="emailAddress" maxlength="45" placeholder="email address">
           </center>
         </div>
 
 
         <div class="form-group">
-          <center><input type="password" class="form-control" name="password" id="password" maxlength="15"
-              placeholder="password"></center>
+          <center><input type="password" class="form-control" name="password" id="password" maxlength="15" placeholder="password"></center>
         </div>
         <div class="form-group">
           <center><input type="password" class="form-control" name="password_re" id="password_re" maxlength="15"
@@ -55,8 +53,7 @@
             use</a> and <a href="/">privacy policy</a> </p>
         <br>
         <p style="font-size:13px; text-align: center;">already on account?
-          <button type="button" onClick="location.href='/login'" class="btn btn-link" id="join" target="self"
-            style="color: #000000;">log
+          <button type="button" onClick="location.href='/login'" class="btn btn-link" id="join" target="self" style="color: #000000;">log
             in</button>
         </p>
       </form>
