@@ -1,66 +1,113 @@
-<br><br>
-<h1 style="text-align: center; font-size: 30px; font-weight: normal;">create account</h1>
-<br><br>
-<div class="row">
-  <div class="container">
-    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+{{!-- TODO (byul) : Signup/Signin page code refactoring --}}
+<div class="container">
+  <hr calss="mv-2">
+  <br><br>
+  <h1 class="textstyle">Welcome to Cuple</h1>
+  <hr class="mv-2">
 
-      <form enctype="multipart/form-data" name="signUpForm" action='/signup' method='post' style="text-align: center;"
-        onsubmit="return checkSignupInput()">
-
-        {{#if messages.warning}}
-        <div class="alert alert-danger flash-message">
-          {{messages.warning}}
-        </div>
-        {{/if}}
-
-        <div class="alert alert-danger form-error-message"></div>
-
-        <div class="form-group">
-          <center>
-            <input type="text" name="firstName" class="form-control" id="firstName" size="4" maxlength="15"
-              placeholder="first Name">
-          </center>
-        </div>
-        <div class="form-group">
-          <center>
-            <input type="text" name="lastName" class="form-control" id="lastName" size="4" maxlength="15"
-              placeholder="last Name">
-          </center>
-        </div>
-
-        <div class="form-group">
-          <center>
-            <input type="text" class="form-control" name="emailAddress" id="emailAddress" maxlength="45"
-              placeholder="email address">
-          </center>
-        </div>
-
-
-        <div class="form-group">
-          <center><input type="password" class="form-control" name="password" id="password" maxlength="15"
-              placeholder="password"></center>
-        </div>
-        <div class="form-group">
-          <center><input type="password" class="form-control" name="password_re" id="password_re" maxlength="15"
-              placeholder="confirm password"></center>
-        </div>
-        <br>
-
-        <button type="submit" class="submit btn btn-signup btn-block" id="signup">create account</button>
-      </form>
-      <br>
-      <form>
-        <p style="text-align: center; color:gray; font-size:13px;">by signing up, you accept the <a href="/">terms of
-            use</a> and <a href="/">privacy policy</a> </p>
-        <br>
-        <p style="font-size:13px; text-align: center;">already on account?
-          <button type="button" onClick="location.href='/login'" class="btn btn-link" id="join" target="self"
-            style="color: #000000;">log
-            in</button>
-        </p>
-      </form>
-      <br><br>
+  <form method="post" enctype="multipart/form-data" name="signUpForm" action='/signup' autocomplete="off" novalidate=""
+    class="form-horizontal">
+    {{#if messages.warning}}
+    <div class="alert alert-danger flash-message">
+      {{messages.warning}}
     </div>
-  </div>
+    {{/if}}
+
+    <div class="alert alert-danger form-error-message"></div>
+
+    <input type="hidden" name="action" value="profile.details">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <div class="form-row">
+          <div class="col-xs-6">
+            <input type="text" name="firstName" class="form-control" placeholder="First Name">
+          </div>
+          <div class="col-xs-6"><input type="text" name="lastname" class="form-control" placeholder="Last Name"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <div class="col-xs-6">
+          <input type="email" name="emailAddress" class="form-control" placeholder="Email"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <div class="col-xs-6">
+          <input type="password" name="password" class="form-control" placeholder="Password"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Confirm Password</label>
+      <div class="col-sm-10">
+        <div class="col-xs-6">
+          <input type="password" name="password_re" class="form-control" placeholder="Confirm Password"></div>
+      </div>
+    </div>
+
+    <hr class="mv-2">
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Address1</label>
+      <div class="col-sm-10">
+        <div class="col-xs-10">
+          <input type="text" name="address" class="form-control" placeholder="Address1"></div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Address2</label>
+      <div class="col-sm-10">
+        <div class="col-xs-10">
+          <input type="text" name="address2" class="form-control" placeholder="Address2">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">City</label>
+      <div class="col-sm-10">
+        <div class="col-xs-4">
+          <input type="text" name="city" class="form-control" placeholder="City"></div>
+      </div>
+
+
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">State</label>
+      <div class="col-sm-10">
+        <div class="col-xs-4">
+          <input type="text" name="state" class="form-control" placeholder="State"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Zipcode</label>
+      <div class="col-sm-10">
+        <div class="col-xs-3">
+          <input type="number" name="zip" class="form-control" placeholder="zip"></div>
+      </div>
+    </div>
+    <button type="submit" data-loading-text="Creating..." class="btn btn-primary btn-right">create profile</button>
+    <br><br>
+    <hr class="mv-2">
+  </form>
+  <br>
+  <p style="text-align: center; color:gray; font-size:13px;">by signing up, you accept the <a href="/">terms of
+      use</a> and <a href="/">privacy policy</a> </p>
+  <br>
+  <p style="font-size:13px; text-align: center;">already on account?
+    <a href="/login">Here</a>
+
+  </p>
+  <br><br>
+
 </div>
